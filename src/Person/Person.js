@@ -1,9 +1,9 @@
 import React from "react";
 
-const person = (props) => {
+const Person = (props) => {
   return (
     <div>
-      <p>
+      <p onClick={props.click}>
         Howdy! My name is {props.name} and I am {props.age} years old.
       </p>
       {/* Passing text from wrapped Person text */}
@@ -12,4 +12,4 @@ const person = (props) => {
   );
 };
 
-export default person;
+export default Person;
