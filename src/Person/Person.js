@@ -8,6 +8,7 @@ const Person = (props) => {
       </p>
       {/* Passing text from wrapped Person text */}
       <p>{props.children}</p>
+      <input type="text" value={props.name} onChange={props.changed} />
     </div>
   );
 };
