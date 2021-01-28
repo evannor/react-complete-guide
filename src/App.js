@@ -9,6 +9,7 @@ class App extends Component {
       { name: "Fred", age: 24 },
       { name: "Garcia", age: 45 },
     ],
+    showPersons: false,
   };
 
   switchNameHandler = (newName) => {
@@ -33,6 +34,15 @@ class App extends Component {
     });
   };
 
+  // toggle whether or not we show the div containing the Person components
+  togglePersonsHandler = () => {
+    // saves the current state in a variable
+    const doesShow = this.state.showPersons;
+    console.log(doesShow);
+    // Change the state so that showPersons is changed between true and false
+    this.setState({ showPersons: !doesShow });
+  };
+
   render() {
     const style = {
       backgroundColor: "white",
@@ -45,25 +55,30 @@ class App extends Component {
       <div className="App">
         <h1>Hello, World!</h1>
         <p>This is really working!</p>
-        <button style={style} onClick={() => this.switchNameHandler("Becky")}>
-          Switch Name
+        <button style={style} onClick={this.togglePersonsHandler}>
+          Show Person Components
         </button>
-        <Person
-          name={this.state.persons[0].name}
-          age={this.state.persons[0].age}
-        />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Emaria")}
-          changed={this.nameChangeHandler}
-        >
-          My Hobbies: Juggling
-        </Person>
-        <Person
-          name={this.state.persons[2].name}
-          age={this.state.persons[2].age}
-        />
+        {/* Use a ternary expression to conditionally render the div and children nodes/elements */}
+        {this.state.showPersons ? (
+          <div>
+            <Person
+              name={this.state.persons[0].name}
+              age={this.state.persons[0].age}
+            />
+            <Person
+              name={this.state.persons[1].name}
+              age={this.state.persons[1].age}
+              click={this.switchNameHandler.bind(this, "Emaria")}
+              changed={this.nameChangeHandler}
+            >
+              My Hobbies: Juggling
+            </Person>
+            <Person
+              name={this.state.persons[2].name}
+              age={this.state.persons[2].age}
+            />
+          </div>
+        ) : null}
       </div>
     );
   }
