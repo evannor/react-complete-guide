@@ -12,14 +12,23 @@ class App extends Component {
     showPersons: false,
   };
 
-  nameChangeHandler = (event) => {
-    this.setState({
-      persons: [
-        { id: Math.random(), name: "Emaria", age: 32 },
-        { id: Math.random(), name: event.target.value, age: 24 },
-        { id: Math.random(), name: "Garcia", age: 45 },
-      ],
+  nameChangeHandler = (event, id) => {
+    // Only update the information for the person selected, based upon the id given
+    const personIndex = this.state.persons.findIndex((p) => {
+      return p.id === id;
     });
+
+    // distribute all of the info at personIndex into a new object
+    const person = { ...this.state.persons[personIndex] };
+    person.name = event.target.value;
+
+    // Make an exact copy of the persons array
+    const persons = [...this.state.persons];
+    // set the item at personIndex to updated person
+    persons[personIndex] = person;
+
+    // set the state to the updated copy of persons
+    this.setState({ persons: persons });
   };
 
   deletePersonHandler = (personIndex) => {
@@ -65,6 +74,7 @@ class App extends Component {
                 age={person.age}
                 click={() => this.deletePersonHandler(index)}
                 key={person.id}
+                changed={(event) => this.nameChangeHandler(event, person.id)}
               />
             );
           })}
