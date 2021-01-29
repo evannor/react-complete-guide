@@ -12,18 +12,6 @@ class App extends Component {
     showPersons: false,
   };
 
-  switchNameHandler = (newName) => {
-    // console.log("was clicked");
-    // this.state.persons[0].name= "Emaria"; INCORRECT
-    this.setState({
-      persons: [
-        { name: newName, age: 32 },
-        { name: "Fred", age: 24 },
-        { name: "Garcia", age: 13 },
-      ],
-    });
-  };
-
   nameChangeHandler = (event) => {
     this.setState({
       persons: [
@@ -32,6 +20,19 @@ class App extends Component {
         { name: "Garcia", age: 45 },
       ],
     });
+  };
+
+  deletePersonHandler = (personIndex) => {
+    // Make a copy of the current state of persons
+    // slice makes an exact copy
+    // const persons = this.state.persons.slice();
+
+    // Using the spread operator, helps the state stay immutable
+    const persons = [...this.state.persons];
+    // remove one specific item from the persons array
+    persons.splice(personIndex, 1);
+    // set new state based upon updated persons array
+    this.setState({ persons: persons });
   };
 
   // toggle whether or not we show the div containing the Person components
@@ -57,8 +58,14 @@ class App extends Component {
     if (this.state.showPersons) {
       persons = (
         <div>
-          {this.state.persons.map((person) => {
-            return <Person name={person.name} age={person.age} />;
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person
+                name={person.name}
+                age={person.age}
+                click={() => this.deletePersonHandler(index)}
+              />
+            );
           })}
         </div>
       );
