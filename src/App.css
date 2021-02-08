@@ -3,9 +3,9 @@
 }
 
 .red {
-  color: red;
+  color: black !important;
 }
 
 .bold {
-  font-weight: bold;
+  font-weight: bold !important;
 }

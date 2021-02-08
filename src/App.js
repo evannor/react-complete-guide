@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { StyleSheet, css } from "aphrodite";
 import "./App.css";
 import Person from "./Person/Person";
 
@@ -93,12 +94,37 @@ class App extends Component {
     if (this.state.persons.length <= 1) {
       classes.push("bold");
     }
+    classes = classes.join(" ");
+
+    let styles;
+    if (style.backgroundColor === "red") {
+      styles = StyleSheet.create({
+        hover: {
+          ":hover": {
+            backgroundColor: "pink !important",
+          },
+        },
+      });
+    } else {
+      styles = StyleSheet.create({
+        hover: {
+          ":hover": {
+            backgroundColor: "lightgreen",
+            color: "black",
+          },
+        },
+      });
+    }
 
     return (
       <div className="App">
         <h1>Hello, World!</h1>
-        <p className={classes.join(" ")}>This is really working!</p>
-        <button style={style} onClick={this.togglePersonsHandler}>
+        <p>This is really working!</p>
+        <button
+          style={style}
+          onClick={this.togglePersonsHandler}
+          className={css(styles.hover).concat(" " + classes)}
+        >
           Show Person Components
         </button>
         {persons}
