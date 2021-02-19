@@ -10,7 +10,12 @@ const StyledDiv = styled.div`
   padding: 16px;
   text-align: center;
 
-  @media (min-width: 500px) {
+  &:hover {
+    background-color: gray;
+    cursor: pointer;
+  }
+
+  @media (max-width: 500px) {
     width: 450px;
   }
 `;
