@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { StyleSheet, css } from "aphrodite";
 import "./App.css";
-import Person from "../components/Persons/Persons/Person/Person";
+import Person from "../components/Persons/Person/Person";
 
 class App extends Component {
   state = {
